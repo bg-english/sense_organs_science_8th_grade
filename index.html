@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubric Speaking — Science 8th Grade — COLEGIO BOSTON FLEXIBLE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a5f7a;
+            --primary-light: #2d8bb4;
+            --primary-dark: #0d3d4f;
+            --success: #22c55e;
+            --success-light: #dcfce7;
+            --warning: #f59e0b;
+            --warning-light: #fef3c7;
+            --danger: #ef4444;
+            --danger-light: #fee2e2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --radius: 8px;
+            --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-100);
+            color: var(--gray-800);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .header img {
+            height: 60px;
+            margin-bottom: 15px;
+            filter: brightness(0) invert(1);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .header .course-info {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        /* Main Card */
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: var(--gray-50);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--gray-200);
+            font-weight: 600;
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Student Info */
+        .student-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--gray-600);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 10px 12px;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 95, 122, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Rubric Table */
+        .rubric-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .rubric-table th,
+        .rubric-table td {
+            padding: 12px 10px;
+            border: 1px solid var(--gray-200);
+            text-align: center;
+            vertical-align: top;
+        }
+
+        .rubric-table thead th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .rubric-table thead th:first-child {
+            width: 40px;
+        }
+
+        .rubric-table thead th:nth-child(2) {
+            text-align: left;
+            min-width: 150px;
+        }
+
+        .rubric-table tbody tr:nth-child(even) {
+            background: var(--gray-50);
+        }
+
+        .rubric-table tbody tr:hover {
+            background: rgba(26, 95, 122, 0.05);
+        }
+
+        .rubric-table td:nth-child(2) {
+            text-align: left;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .rubric-table td.description {
+            font-size: 0.78rem;
+            color: var(--gray-600);
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        /* Score Cells */
+        .score-cell {
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .score-cell:hover {
+            background: rgba(26, 95, 122, 0.1);
+        }
+
+        .score-cell.selected {
+            background: var(--primary) !important;
+            color: white;
+            font-weight: 600;
+        }
+
+        .score-cell input[type="radio"] {
+            display: none;
+        }
+
+        /* Score Display */
+        .score-display {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0 auto;
+        }
+
+        /* Summary Section */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .summary-item {
+            background: var(--gray-50);
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+
+        .summary-item .label {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            margin-bottom: 5px;
+        }
+
+        .summary-item .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .summary-item.final-grade .value {
+            font-size: 2.5rem;
+            color: var(--success);
+        }
+
+        /* Buttons */
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-300);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #16a34a;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        /* Override Section */
+        .override-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            align-items: end;
+        }
+
+        /* Grade Scale */
+        .grade-scale {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--gray-50);
+            border-radius: var(--radius);
+        }
+
+        .grade-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .grade-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .grade-dot.excellent { background: #22c55e; }
+        .grade-dot.good { background: #84cc16; }
+        .grade-dot.satisfactory { background: #f59e0b; }
+        .grade-dot.developing { background: #f97316; }
+        .grade-dot.beginning { background: #ef4444; }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gray-800);
+            color: white;
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.success {
+            background: var(--success);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.4rem;
+            }
+
+            .rubric-table {
+                font-size: 0.75rem;
+            }
+
+            .rubric-table th,
+            .rubric-table td {
+                padding: 8px 6px;
+            }
+
+            .rubric-table td.description {
+                font-size: 0.7rem;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid var(--gray-200);
+            }
+
+            .actions,
+            .toast {
+                display: none !important;
+            }
+
+            .header {
+                background: var(--primary) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .score-cell.selected {
+                background: var(--primary) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .rubric-table thead th {
+                background: var(--primary) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <img src="https://vouxrqsiyoyllxgcriic.supabase.co/storage/v1/object/public/guide-images/logos/a21e681b-5898-4647-8ad9-bdb5f9844094/1775460558269.png" alt="COLEGIO BOSTON FLEXIBLE">
+            <h1>🎤 Science Speaking Rubric — Third Term</h1>
+            <div class="subtitle">8th Grade · COLEGIO BOSTON FLEXIBLE · 2026</div>
+            <div class="course-info">
+                <strong>Topics:</strong> Sense Organs | Locomotor System | Human Reproduction<br>
+                <strong>Biblical Principle:</strong> "Spiritual Senses!" — Hebrews 5:14
+            </div>
+        </div>
+
+        <!-- Student Information -->
+        <div class="card">
+            <div class="card-header">👤 Información del Estudiante</div>
+            <div class="card-body">
+                <div class="student-info">
+                    <div class="form-group">
+                        <label for="studentName">Student Name / Nombre del estudiante</label>
+                        <input type="text" id="studentName" placeholder="Enter student name...">
+                    </div>
+                    <div class="form-group">
+                        <label for="evalDate">Evaluation Date / Fecha de evaluación</label>
+                        <input type="date" id="evalDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="teacher">Teacher / Docente</label>
+                        <input type="text" id="teacher" placeholder="Enter teacher name..." value="Edoardo Arturo Ortiz Urbina">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rubric -->
+        <div class="card">
+            <div class="card-header">📋 Criterios de Evaluación — Speaking</div>
+            <div class="card-body" style="overflow-x: auto;">
+                <table class="rubric-table" id="rubricTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Criterion</th>
+                            <th>5<br><small>Excellent</small></th>
+                            <th>4<br><small>Good</small></th>
+                            <th>3<br><small>Satisfactory</small></th>
+                            <th>2<br><small>Developing</small></th>
+                            <th>1<br><small>Beginning</small></th>
+                        </tr>
+                    </thead>
+                    <tbody id="rubricBody">
+                        <!-- Rows will be inserted by JavaScript -->
+                    </tbody>
+                </table>
+
+                <div class="grade-scale">
+                    <div class="grade-item"><span class="grade-dot excellent"></span> 5 — Excellent</div>
+                    <div class="grade-item"><span class="grade-dot good"></span> 4 — Good</div>
+                    <div class="grade-item"><span class="grade-dot satisfactory"></span> 3 — Satisfactory</div>
+                    <div class="grade-item"><span class="grade-dot developing"></span> 2 — Developing</div>
+                    <div class="grade-item"><span class="grade-dot beginning"></span> 1 — Beginning</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="card">
+            <div class="card-header">📊 Resumen de Calificación</div>
+            <div class="card-body">
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="label">Total Score / Puntuación Total</div>
+                        <div class="value" id="totalScore">0 / 55</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Criteria Evaluated / Criterios Evaluados</div>
+                        <div class="value" id="criteriaCount">0 / 11</div>
+                    </div>
+                    <div class="summary-item final-grade">
+                        <div class="label">Final Grade / Nota Final</div>
+                        <div class="value" id="finalGrade">—</div>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; font-size: 0.85rem; color: var(--gray-500); text-align: center;">
+                    <strong>Formula:</strong> Nota final = (Total / 55) × 4 + 1 · Scale 1.0 – 5.0
+                </p>
+            </div>
+        </div>
+
+        <!-- Teacher Comments -->
+        <div class="card">
+            <div class="card-header">💬 Comentarios del Docente</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <textarea id="teacherComments" placeholder="Enter comments about the student's performance..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Override Section -->
+        <div class="card">
+            <div class="card-header">🔄 Override / Ajuste de Nota</div>
+            <div class="card-body">
+                <div class="override-section">
+                    <div class="form-group">
+                        <label for="calculatedGrade">Nota Calculada</label>
+                        <input type="text" id="calculatedGrade" readonly style="background: var(--gray-100);">
+                    </div>
+                    <div class="form-group">
+                        <label for="adjustedGrade">Nota Definitiva (Override)</label>
+                        <input type="number" id="adjustedGrade" min="1.0" max="5.0" step="0.1" placeholder="1.0 - 5.0">
+                    </div>
+                    <div class="form-group">
+                        <label>Escala</label>
+                        <input type="text" value="1.0 – 5.0" readonly style="background: var(--gray-100);">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="card">
+            <div class="card-body">
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="calculateGrade()">
+                        📊 Calcular Nota
+                    </button>
+                    <button class="btn btn-secondary" onclick="resetRubric()">
+                        🔄 Reiniciar
+                    </button>
+                    <button class="btn btn-secondary" onclick="printRubric()">
+                        🖨️ Imprimir / PDF
+                    </button>
+                    <button class="btn btn-success" onclick="copyResults()">
+                        📋 Copiar Resultados
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 20px; color: var(--gray-500); font-size: 0.85rem;">
+            <strong>COLEGIO BOSTON FLEXIBLE</strong> · Science · 8th Grade · Third Term · 2026<br>
+            Scale 1.0 – 5.0 · DANE: 308001800455
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage">Results copied!</span>
+    </div>
+
+    <script>
+        // Rubric Data
+        const rubricData = [
+            {
+                id: 1,
+                name: "Pronunciation",
+                descriptions: {
+                    5: "Pronunciation is clear and accurate throughout the presentation, with correct intonation and stress patterns",
+                    4: "Pronunciation is mostly clear with minor errors that don't affect understanding",
+                    3: "Pronunciation is understandable but with some noticeable errors",
+                    2: "Pronunciation has frequent errors that occasionally affect understanding",
+                    1: "Pronunciation is difficult to understand, many errors interfere with communication"
+                }
+            },
+            {
+                id: 2,
+                name: "Fluency",
+                descriptions: {
+                    5: "Speaks fluently and naturally, acts as a facilitator, helps develop conversation smoothly",
+                    4: "Speaks with good fluency, minor hesitations that don't disrupt flow",
+                    3: "Speaks with acceptable fluency, some pauses but maintains communication",
+                    2: "Speaks with noticeable hesitations, speech is sometimes choppy",
+                    1: "Speech is very hesitant and fragmented, difficult to follow"
+                }
+            },
+            {
+                id: 3,
+                name: "Speech Duration",
+                descriptions: {
+                    5: "Presentation is within the required time, well-paced, and covers all key points",
+                    4: "Presentation is within time, covers most key points",
+                    3: "Presentation is slightly over/under time, covers basic points",
+                    2: "Presentation significantly over/under time, missing several points",
+                    1: "Presentation is far too short or long, fails to address the topic"
+                }
+            },
+            {
+                id: 4,
+                name: "Grammar Structures",
+                descriptions: {
+                    5: "Uses grammar structures studied in class accurately and appropriately",
+                    4: "Uses most grammar structures correctly with minor errors",
+                    3: "Uses basic grammar structures, some errors but meaning is clear",
+                    2: "Frequent grammar errors that sometimes affect meaning",
+                    1: "Grammar errors are pervasive, meaning is often unclear"
+                }
+            },
+            {
+                id: 5,
+                name: "Vocabulary",
+                descriptions: {
+                    5: "Uses scientific vocabulary from class accurately and effectively to communicate ideas",
+                    4: "Uses most scientific vocabulary correctly, minor word choice issues",
+                    3: "Uses basic vocabulary, occasional misuse but generally understandable",
+                    2: "Limited vocabulary range, frequent misuse of terms",
+                    1: "Very limited vocabulary, cannot use scientific terms effectively"
+                }
+            },
+            {
+                id: 6,
+                name: "Voice and Non-verbal Communication",
+                descriptions: {
+                    5: "Voice is clear, well-projected, and uses appropriate intonation and expressions to enhance communication",
+                    4: "Voice is clear most of the time, good use of expressions",
+                    3: "Voice is understandable, some variation in tone",
+                    2: "Voice is monotone or too quiet at times, limited expressions",
+                    1: "Voice is difficult to hear, no variation in tone or expression"
+                }
+            },
+            {
+                id: 7,
+                name: "Listening Skills",
+                descriptions: {
+                    5: "Responds to all questions appropriately, comprehends all questions, and incorporates them into the discussion",
+                    4: "Responds to most questions well, comprehends most questions",
+                    3: "Responds to basic questions, some comprehension issues",
+                    2: "Struggles with questions, limited comprehension",
+                    1: "Cannot respond to questions, does not understand"
+                }
+            },
+            {
+                id: 8,
+                name: "Creativity",
+                descriptions: {
+                    5: "Brings all necessary materials, presents innovative ideas and engaging demonstrations",
+                    4: "Brings most materials, presents good ideas",
+                    3: "Brings basic materials, presents standard ideas",
+                    2: "Missing some materials, limited creativity",
+                    1: "No materials prepared, no creative elements"
+                }
+            },
+            {
+                id: 9,
+                name: "Eye Contact",
+                descriptions: {
+                    5: "Maintains consistent eye contact with the audience throughout the presentation",
+                    4: "Good eye contact, occasional glances at notes",
+                    3: "Some eye contact, frequently looks at notes or slides",
+                    2: "Rarely makes eye contact, mostly reads from notes",
+                    1: "No eye contact, reads entirely from notes"
+                }
+            },
+            {
+                id: 10,
+                name: "Use of Note Cards",
+                descriptions: {
+                    5: "Uses note cards as reference while maintaining eye contact, never reads directly from them",
+                    4: "Uses note cards well, minimal reading",
+                    3: "Uses note cards but occasionally reads from them",
+                    2: "Relies heavily on note cards, reads frequently",
+                    1: "Reads entirely from note cards, no natural delivery"
+                }
+            },
+            {
+                id: 11,
+                name: "Biblical Integration",
+                descriptions: {
+                    5: "Seamlessly integrates biblical principles related to the topic, showing deep reflection",
+                    4: "Integrates biblical principles well, good reflection",
+                    3: "Includes biblical reference, basic connection",
+                    2: "Biblical integration is superficial or forced",
+                    1: "No biblical integration attempted"
+                }
+            }
+        ];
+
+        // Store selected scores
+        let selectedScores = {};
+
+        // Initialize rubric table
+        function initRubric() {
+            const tbody = document.getElementById('rubricBody');
+            tbody.innerHTML = '';
+
+            rubricData.forEach(criterion => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${criterion.id}</td>
+                    <td>${criterion.name}</td>
+                    ${[5, 4, 3, 2, 1].map(score => `
+                        <td class="score-cell" data-criterion="${criterion.id}" data-score="${score}" onclick="selectScore(${criterion.id}, ${score})">
+                            <input type="radio" name="criterion_${criterion.id}" value="${score}" id="criterion_${criterion.id}_${score}">
+                            <div class="description">${criterion.descriptions[score]}</div>
+                        </td>
+                    `).join('')}
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Select score for a criterion
+        function selectScore(criterionId, score) {
+            // Remove previous selection for this criterion
+            document.querySelectorAll(`[data-criterion="${criterionId}"]`).forEach(cell => {
+                cell.classList.remove('selected');
+            });
+
+            // Add selection to clicked cell
+            const selectedCell = document.querySelector(`[data-criterion="${criterionId}"][data-score="${score}"]`);
+            if (selectedCell) {
+                selectedCell.classList.add('selected');
+                selectedCell.querySelector('input').checked = true;
+            }
+
+            // Store the score
+            selectedScores[criterionId] = score;
+
+            // Update summary
+            updateSummary();
+        }
+
+        // Update summary
+        function updateSummary() {
+            const scores = Object.values(selectedScores);
+            const total = scores.reduce((sum, score) => sum + score, 0);
+            const count = scores.length;
+
+            document.getElementById('totalScore').textContent = `${total} / 55`;
+            document.getElementById('criteriaCount').textContent = `${count} / 11`;
+
+            // Calculate final grade
+            if (count > 0) {
+                const finalGrade = ((total / 55) * 4 + 1).toFixed(1);
+                document.getElementById('finalGrade').textContent = finalGrade;
+                document.getElementById('calculatedGrade').value = finalGrade;
+            } else {
+                document.getElementById('finalGrade').textContent = '—';
+                document.getElementById('calculatedGrade').value = '';
+            }
+        }
+
+        // Calculate grade
+        function calculateGrade() {
+            updateSummary();
+            showToast('Grade calculated successfully!', 'success');
+        }
+
+        // Reset rubric
+        function resetRubric() {
+            if (confirm('Are you sure you want to reset all selections?')) {
+                selectedScores = {};
+                document.querySelectorAll('.score-cell').forEach(cell => {
+                    cell.classList.remove('selected');
+                    cell.querySelector('input').checked = false;
+                });
+                document.getElementById('studentName').value = '';
+                document.getElementById('evalDate').value = '';
+                document.getElementById('teacher').value = 'Edoardo Arturo Ortiz Urbina';
+                document.getElementById('teacherComments').value = '';
+                document.getElementById('adjustedGrade').value = '';
+                updateSummary();
+                showToast('Rubric reset successfully!', 'success');
+            }
+        }
+
+        // Print rubric
+        function printRubric() {
+            window.print();
+        }
+
+        // Copy results
+        function copyResults() {
+            const studentName = document.getElementById('studentName').value || 'N/A';
+            const evalDate = document.getElementById('evalDate').value || 'N/A';
+            const teacher = document.getElementById('teacher').value || 'N/A';
+            const comments = document.getElementById('teacherComments').value || '';
+            const adjustedGrade = document.getElementById('adjustedGrade').value;
+
+            let results = `🎤 SPEAKING RUBRIC — SCIENCE 8TH GRADE — THIRD TERM\n`;
+            results += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+            results += `👤 Student: ${studentName}\n`;
+            results += `📅 Date: ${evalDate}\n`;
+            results += `👨‍🏫 Teacher: ${teacher}\n\n`;
+            results += `📊 SCORES:\n`;
+
+            rubricData.forEach(criterion => {
+                const score = selectedScores[criterion.id] || '—';
+                results += `  ${criterion.id}. ${criterion.name}: ${score}/5\n`;
+            });
+
+            const scores = Object.values(selectedScores);
+            const total = scores.reduce((sum, score) => sum + score, 0);
+            const count = scores.length;
+            const calculatedGrade = count > 0 ? ((total / 55) * 4 + 1).toFixed(1) : '—';
+            const finalGrade = adjustedGrade || calculatedGrade;
+
+            results += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            results += `Total: ${total}/55 | Evaluated: ${count}/11\n`;
+            results += `Calculated Grade: ${calculatedGrade}\n`;
+            results += `Final Grade: ${finalGrade}\n`;
+
+            if (comments) {
+                results += `\n💬 Comments:\n${comments}\n`;
+            }
+
+            results += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            results += `COLEGIO BOSTON FLEXIBLE · Science · 8th Grade · Third Term · 2026\n`;
+            results += `Formula: Nota final = (Total / 55) × 4 + 1 · Scale 1.0 – 5.0\n`;
+
+            navigator.clipboard.writeText(results).then(() => {
+                showToast('Results copied to clipboard!', 'success');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = results;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('Results copied to clipboard!', 'success');
+            });
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+
+            toastMessage.textContent = message;
+            toast.className = 'toast show ' + type;
+
+            setTimeout(() => {
+                toast.className = 'toast';
+            }, 3000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initRubric();
+
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('evalDate').value = today;
+        });
+    </script>
+</body>
+</html>
